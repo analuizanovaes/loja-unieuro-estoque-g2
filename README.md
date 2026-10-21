@@ -1,4 +1,3 @@
-```markdown
 # 📦 Loja UNIEURO - Tema 8: Consulta de Estoque Mínimo
 
 Este projeto foi desenvolvido para a disciplina de Programação Orientada a Objetos (2026.2) do Centro Universitário UNIEURO. O sistema implementa o caso de uso de identificação de produtos com quantidade abaixo do limite de segurança no stock, utilizando interface gráfica e persistência de dados.
@@ -14,6 +13,7 @@ Este projeto foi desenvolvido para a disciplina de Programação Orientada a Obj
 * **Base de Dados:** PostgreSQL / Supabase
 * **Conexão:** JDBC com PreparedStatement
 
+```
 ## ⚙️ Configuração da Conexão
 Para que a aplicação funcione corretamente, é necessário configurar a conexão com a base de dados:
 1. Importe o ficheiro de script disponível na pasta `sql/` na sua ferramenta de gestão de base de dados para criar a tabela de produtos e inserir os dados iniciais[cite: 2].
@@ -23,7 +23,6 @@ Para que a aplicação funcione corretamente, é necessário configurar a conex�
    String url = "jdbc:postgresql://SEU_HOST:5432/SUA_BASE_DE_DADOS";
    String user = "SEU_USUARIO";
    String password = "SUA_SENHA";
-
 ```
 
 ## ▶️ Instruções de Execução
