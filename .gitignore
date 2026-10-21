@@ -1,0 +1,45 @@
+# Arquivos compilados do Java
+*.class
+
+# Pastas de build e diretórios de saída
+/bin/
+/build/
+/out/
+target/
+
+# Pacotes gerados e binários
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Configurações do IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Configurações do VS Code
+.vscode/
+*.code-workspace
+
+# Arquivos de log e crash da Máquina Virtual Java (JVM)
+*.log
+hs_err_pid*
+replay_pid*
+
+# Arquivos de ambiente e credenciais (Essencial para proteger senhas do banco de dados)
+.env
+.env.local
+.env.*
+*.properties
+credentials.properties
+database.properties
+
+# Arquivos de cache e miniaturas do Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
