@@ -1,0 +1,26 @@
+Loja UNIEURO - Sistema de Gestão de Estoque
+Tema 8: Consulta e Identificação de Estoque Mínimo
+
+Projeto desenvolvido para a disciplina de Programação Orientada a Objetos do Centro Universitário UNIEURO.
+
+Tecnologias Utilizadas
+Linguagem: Java (JDK 17 ou superior)
+Interface Gráfica: Java Swing
+Persistência: JDBC (PostgreSQL / Supabase)
+
+Instruções de Configuração e Execução
+
+1. Configuração do Banco de Dados:
+   Crie um banco de dados utilizando PostgreSQL ou Supabase.
+   Execute o script SQL contido na pasta de migrações (`produtos.sql`) para criar a tabela e carregar os dados de teste.
+
+2. Configuração da Conexão:
+   Abra a classe de conexão JDBC no projeto e insira as credenciais correspondentes ao seu ambiente (URL, usuário e senha).
+
+3. Execução do Projeto:
+   Importe o projeto em sua IDE (IntelliJ IDEA, Eclipse ou Visual Studio Code).
+   Certifique-se de que o driver JDBC do PostgreSQL consta nas dependências do projeto.
+   Execute a classe principal da interface gráfica para iniciar a aplicação.
+
+Declaração de Uso de Inteligência Artificial
+Conforme as normas estabelecidas para a disciplina, declaramos que ferramentas de Inteligência Artificial foram empregadas como apoio para a estruturação dos scripts de teste, revisão de boas práticas de programação orientada a objetos e formatação da documentação técnica do repositório.
