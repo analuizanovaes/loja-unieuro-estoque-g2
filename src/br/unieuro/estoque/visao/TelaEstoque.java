@@ -1,6 +1,8 @@
 package br.unieuro.estoque.visao;
 
 import br.unieuro.estoque.modelo.Produto;
+import br.unieuro.estoque.dao.ProdutoDAO;
+import br.unieuro.estoque.excecao.EstoqueException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +26,7 @@ public class TelaEstoque extends JFrame {
     private final Color ROSA = Color.decode("#ff79c6");
 
     public TelaEstoque() {
-        
+
         setTitle("Controle de Estoque");
         setSize(700, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,11 +36,11 @@ public class TelaEstoque extends JFrame {
 
         JPanel painelTopo = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         painelTopo.setBackground(FUNDO);
-        
+
         JLabel lblBusca = new JLabel("Pesquisar Produto:");
         lblBusca.setForeground(TEXTO);
         lblBusca.setFont(new Font("Consolas", Font.BOLD, 14));
-        
+
         txtBusca = new JTextField(15);
         txtBusca.setBackground(PAINEL);
         txtBusca.setForeground(TEXTO);
@@ -68,13 +70,13 @@ public class TelaEstoque extends JFrame {
         String[] colunas = {"ID", "Produto", "Qtd Atual", "Estoque Mínimo", "Status"};
         modeloTabela = new DefaultTableModel(colunas, 0);
         tabelaEstoque = new JTable(modeloTabela);
-        
+
         tabelaEstoque.setBackground(PAINEL);
         tabelaEstoque.setForeground(TEXTO);
         tabelaEstoque.setRowHeight(30);
         tabelaEstoque.setFont(new Font("Consolas", Font.PLAIN, 13));
         tabelaEstoque.setGridColor(FUNDO);
-        
+
         tabelaEstoque.getTableHeader().setBackground(Color.decode("#6272a4"));
         tabelaEstoque.getTableHeader().setForeground(TEXTO);
         tabelaEstoque.getTableHeader().setFont(new Font("Consolas", Font.BOLD, 14));
@@ -94,40 +96,45 @@ public class TelaEstoque extends JFrame {
 
     private void buscarEstoqueMinimo() {
 
-        modeloTabela.setRowCount(0); 
+        modeloTabela.setRowCount(0);
         String filtroNome = txtBusca.getText().toLowerCase();
-        
-        // MOCK DE TESTE (Até terminar o banco)
-        List<Produto> produtos = new ArrayList<>();
-        produtos.add(new Produto(1, "Teclado Mecanico", 5, 10));
-        produtos.add(new Produto(2, "Mouse Sem Fio", 2, 15));
-        produtos.add(new Produto(3, "Gabinete Glass", 20, 5));
-        produtos.add(new Produto(4, "Headset Bluetooth", 1, 10));
+
+        List<Produto> produtos;
+        try {
+            produtos = new ProdutoDAO().buscarAbaixoDoMinimo(filtroNome);
+        } catch (EstoqueException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Erro na Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         for (Produto p : produtos) {
 
             boolean correspondeAoFiltro = p.getNome().toLowerCase().contains(filtroNome);
-            
+
             if (p.isAbaixoDoMinimo() && correspondeAoFiltro) {
 
                 modeloTabela.addRow(new Object[]{
-                    p.getId(), 
-                    p.getNome(), 
-                    p.getQuantidadeAtual(), 
-                    p.getEstoqueMinimo(),
-                    p.getStatusAlerta()
+                        p.getId(),
+                        p.getNome(),
+                        p.getQuantidadeAtual(),
+                        p.getEstoqueMinimo(),
+                        p.getStatusAlerta()
                 });
-
-                if (modeloTabela.getRowCount() == 0) {
-
-                    JOptionPane.showMessageDialog(
-                        this, 
-                        "Nenhum produto com estoque crítico corresponde a esta busca.", 
-                        "Resultado da Consulta", 
-                        JOptionPane.INFORMATION_MESSAGE
-    );
-}
             }
+        }
+
+        if (modeloTabela.getRowCount() == 0) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Nenhum produto com estoque crítico corresponde a esta busca.",
+                    "Resultado da Consulta",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         }
     }
 }
